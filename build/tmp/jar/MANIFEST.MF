@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Specification-Title: blueprint
+Specification-Vendor: CitiesChange
+Specification-Version: 1
+Implementation-Title: citieschange2
+Implementation-Version: 26b1
+Implementation-Vendor: CitiesChange
+Implementation-Timestamp: 2026-04-25T11:25:12+0800
+MixinConfigs: blueprint.mixins.json
+Refmap: blueprint.refmap.json
+
