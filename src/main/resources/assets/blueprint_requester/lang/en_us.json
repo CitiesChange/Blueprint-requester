@@ -1,0 +1,5 @@
+{
+  "itemGroup.blueprint_requester": "Example Mod Tab",
+  "block.blueprint_requester.example_block": "Example Block",
+  "item.blueprint_requester.example_item": "Example Item"
+}
