@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.Citieschange.mixin",
+  "package": "net.CitiesChange.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "AbstractColonyBlockMixin",
