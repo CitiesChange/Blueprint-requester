@@ -5,11 +5,7 @@ import com.minecolonies.core.client.gui.WindowPostBoxMain;
 import com.minecolonies.core.colony.buildings.workerbuildings.PostBox;
 import com.minecolonies.core.network.messages.server.colony.building.postbox.PostBoxRequestMessage;
 import net.Citieschange.ClipBoard.ClipBoardExtract;
-import net.Citieschange.ClipBoard.channel;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -18,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static net.Citieschange.ClipBoard.ClipBoardExtract.nbt;
+import static net.Citieschange.ClipBoard.ClipBoardExtract.icon;
 
 @Mixin(WindowPostBoxMain.class)
 public class WindowPostBoxMainMixin {
@@ -27,24 +23,19 @@ public class WindowPostBoxMainMixin {
     private PostBox.View postBoxView;
     @Shadow
     private boolean deliverAvailable;
-    @Unique
-    private int cheakart= channel.art;
 
     @Inject(method ="onOpened", at = @At("HEAD"),remap = false)
     public void onOpened(CallbackInfo ci) {
-        if(cheakart==1) {
+        if(ClipBoardExtract.check) {
             deliverymanconfig$Clickwithbook();
         }
     }
     @Unique
     private void deliverymanconfig$Clickwithbook() {
         ClipBoardExtract network = new ClipBoardExtract();
-        network.ExtractClipboard(nbt);
         int questcount = 0;
-        for (ClipBoardExtract.MaterialEntry materialEntry : network.materials) {
-            ResourceLocation itemRL = new ResourceLocation(materialEntry.itemStack);
-            Item itemObj = ForgeRegistries.ITEMS.getValue(itemRL);
-            ItemStack item = (itemObj != null) ? new ItemStack(itemObj) : ItemStack.EMPTY;
+        for (ClipBoardExtract.MaterialEntry materialEntry : network.ExtractClipboard(icon)) {
+            ItemStack item = materialEntry.itemStack;
             int qty = materialEntry.count;
             if (qty > 0) {
                 Network.getNetwork().sendToServer(new PostBoxRequestMessage(postBoxView, item.copy(), qty, deliverAvailable));

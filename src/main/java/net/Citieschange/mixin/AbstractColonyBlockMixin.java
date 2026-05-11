@@ -5,7 +5,6 @@ import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.core.colony.buildings.workerbuildings.PostBox;
 import net.Citieschange.ClipBoard.ClipBoardExtract;
-import net.Citieschange.ClipBoard.channel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -32,10 +31,10 @@ public class AbstractColonyBlockMixin {
         }
         if (extract.isCreateClipboard(heldItem)) {
             extract.nbtget(heldItem);
-            channel.setArt(1);
+            ClipBoardExtract.check=true;
 
         } else {
-            channel.setArt(0);
+            ClipBoardExtract.check=false;
         }
     }
 }
